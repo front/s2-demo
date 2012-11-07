@@ -42,7 +42,12 @@ class Action
      */
     private $start_date;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Goal", inversedBy="actions")
+     * @ORM\JoinColumn(name="goal_id", referencedColumnName="id")
+     */
+    protected $goal;
+        
     /**
      * Get id
      *
@@ -120,5 +125,28 @@ class Action
     public function getStartDate()
     {
         return $this->start_date;
+    }
+
+    /**
+     * Set goal
+     *
+     * @param Fk\StrategyMakerBundle\Entity\Goal $goal
+     * @return Action
+     */
+    public function setGoal(\Fk\StrategyMakerBundle\Entity\Goal $goal = null)
+    {
+        $this->goal = $goal;
+    
+        return $this;
+    }
+
+    /**
+     * Get goal
+     *
+     * @return Fk\StrategyMakerBundle\Entity\Goal 
+     */
+    public function getGoal()
+    {
+        return $this->goal;
     }
 }

@@ -35,7 +35,16 @@ class Strategy
      */
     private $vision;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="Goal", mappedBy="strategy")
+     */
+    protected $goals;
+    
+    public function __construct()
+    {
+        $this->goals = new ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -90,5 +99,38 @@ class Strategy
     public function getVision()
     {
         return $this->vision;
+    }
+
+    /**
+     * Add goals
+     *
+     * @param Fk\StrategyMakerBundle\Entity\Goal $goals
+     * @return Strategy
+     */
+    public function addGoal(\Fk\StrategyMakerBundle\Entity\Goal $goals)
+    {
+        $this->goals[] = $goals;
+    
+        return $this;
+    }
+
+    /**
+     * Remove goals
+     *
+     * @param Fk\StrategyMakerBundle\Entity\Goal $goals
+     */
+    public function removeGoal(\Fk\StrategyMakerBundle\Entity\Goal $goals)
+    {
+        $this->goals->removeElement($goals);
+    }
+
+    /**
+     * Get goals
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getGoals()
+    {
+        return $this->goals;
     }
 }

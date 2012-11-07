@@ -28,6 +28,21 @@ class Goal
      */
     private $title;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Strategy", inversedBy="goals")
+     * @ORM\JoinColumn(name="strategy_id", referencedColumnName="id")
+     */
+    protected $strategy;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Action", mappedBy="goal")
+     */
+    protected $actions;
+    
+    public function __construct()
+    {
+        $this->actions = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -60,5 +75,61 @@ class Goal
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set strategy
+     *
+     * @param Fk\StrategyMakerBundle\Entity\Strategy $strategy
+     * @return Goal
+     */
+    public function setStrategy(\Fk\StrategyMakerBundle\Entity\Strategy $strategy = null)
+    {
+        $this->strategy = $strategy;
+    
+        return $this;
+    }
+
+    /**
+     * Get strategy
+     *
+     * @return Fk\StrategyMakerBundle\Entity\Strategy 
+     */
+    public function getStrategy()
+    {
+        return $this->strategy;
+    }
+
+    /**
+     * Add actions
+     *
+     * @param Fk\StrategyMakerBundle\Entity\Action $actions
+     * @return Goal
+     */
+    public function addAction(\Fk\StrategyMakerBundle\Entity\Action $actions)
+    {
+        $this->actions[] = $actions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove actions
+     *
+     * @param Fk\StrategyMakerBundle\Entity\Action $actions
+     */
+    public function removeAction(\Fk\StrategyMakerBundle\Entity\Action $actions)
+    {
+        $this->actions->removeElement($actions);
+    }
+
+    /**
+     * Get actions
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getActions()
+    {
+        return $this->actions;
     }
 }
