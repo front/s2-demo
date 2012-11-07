@@ -1,0 +1,3 @@
+#ignore cache and logs dirs
+/app/cache/
+/app/logs/

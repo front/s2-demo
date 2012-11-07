@@ -6,3 +6,5 @@
 5099a17fd4bbb,127.0.0.1,GET,http://local.strategymaker.com/demo/,1352245631,
 5099a181d9eb2,127.0.0.1,GET,http://local.strategymaker.com/demo/hello/World,1352245633,
 5099a18373ae3,127.0.0.1,GET,http://local.strategymaker.com/,1352245635,
+5099a59033eff,127.0.0.1,GET,http://local.strategymaker.com/_configurator/,1352246672,
+5099a59137736,127.0.0.1,GET,http://local.strategymaker.com/_configurator/step/0,1352246673,
