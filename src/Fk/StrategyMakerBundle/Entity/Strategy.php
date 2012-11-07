@@ -40,6 +40,11 @@ class Strategy
      * @ORM\OneToMany(targetEntity="Goal", mappedBy="strategy")
      */
     protected $goals;
+        
+    public function __toString()
+    {
+        return $this->title;
+    }
     
     public function __construct()
     {

@@ -40,6 +40,11 @@ class Goal
      */
     protected $actions;
     
+    public function __toString()
+    {
+        return $this->title;
+    }
+    
     public function __construct()
     {
         $this->actions = new ArrayCollection();
