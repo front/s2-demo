@@ -1,0 +1,19 @@
+/* 
+    Document   : style
+    Created on : Nov 7, 2012, 11:39:25 PM
+    Author     : marcofernandes75
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.strategy-block {
+  padding: 20px;
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+  color: inherit;
+  background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}

@@ -1,3 +1,5 @@
+{% extends "FkStrategyMakerBundle::layout.html.twig" %}
+{% block content %}
 <h1>Strategy creation</h1>
 
 <form action="{{ path('strategy_create') }}" method="post" {{ form_enctype(form) }}>
@@ -14,3 +16,4 @@
         </a>
     </li>
 </ul>
+{% endblock %}
