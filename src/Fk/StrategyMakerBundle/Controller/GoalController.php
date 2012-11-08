@@ -61,16 +61,21 @@ class GoalController extends Controller
     /**
      * Displays a form to create a new Goal entity.
      *
-     * @Route("/new", name="goal_new")
+     * @Route("/new/{strategy_id}", name="goal_new")
      * @Template()
      */
-    public function newAction()
+    public function newAction($strategy_id)
     {
+        $strategy = $this->getDoctrine()->getManager()
+            ->getRepository('FkStrategyMakerBundle:Strategy')->find($strategy_id);
+        
         $entity = new Goal();
+        $entity->setStrategy($strategy);
         $form   = $this->createForm(new GoalType(), $entity);
 
         return array(
             'entity' => $entity,
+            'strategy' => $strategy,
             'form'   => $form->createView(),
         );
     }
@@ -93,7 +98,7 @@ class GoalController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('goal_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('strategy_show', array('id' => $entity->getStrategy()->getId())));
         }
 
         return array(
@@ -173,6 +178,8 @@ class GoalController extends Controller
     {
         $form = $this->createDeleteForm($id);
         $form->bind($request);
+        
+        $strategy_id = 0;
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -182,11 +189,13 @@ class GoalController extends Controller
                 throw $this->createNotFoundException('Unable to find Goal entity.');
             }
 
+            $strategy_id = $entity->getStrategy()->getId();
+            
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('goal'));
+        return $this->redirect($this->generateUrl('strategy_show', array('id' => $strategy_id)));
     }
 
     private function createDeleteForm($id)

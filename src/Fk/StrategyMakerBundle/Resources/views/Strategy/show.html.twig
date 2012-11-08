@@ -1,40 +1,66 @@
 {% extends "FkStrategyMakerBundle::layout.html.twig" %}
 {% block content %}
-<h1>Strategy</h1>
+<div class="dark-block">
+  <div class="form-actions">
+    <h3>{{ entity.title }}</h3>
+    <form action="{{ path('strategy_delete', { 'id': entity.id }) }}" method="post">
+      {{ form_widget(delete_form) }}
+      <a class="btn btn-primary btn-small" href="{{ path('strategy_edit', { 'id': entity.id }) }}"><i class="icon-edit icon-white"></i>Edit</a>
+      <button class="btn btn-danger btn-small" type="submit"><i class="icon-remove icon-white"></i>Delete</button>
+    </form>
+  </div>
+  <p>
+    {{ entity.vision }}
+  </p>
+</div>
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>{{ entity.title }}</td>
-        </tr>
-        <tr>
-            <th>Vision</th>
-            <td>{{ entity.vision }}</td>
-        </tr>
-    </tbody>
-</table>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('strategy') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('strategy_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('strategy_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+<div style="text-align: right">
+  <a class="btn btn-primary btn-large" href="{{ path('goal_new', { 'strategy_id': entity.id}) }}"><i class="icon-plus icon-white"></i> Goal</a>
+</div>
+        
+<div class="row">
+{% for goal in entity.getGoals() %}
+  <div class="span12">
+    <div class="dark-block">
+      <div class="form-actions">
+        <h3>{{ goal.title }}</h3>
+        <form action="{{ path('goal_delete', { 'id': goal.id }) }}" method="post">
+          {{ form_widget(delete_form) }}
+          <a class="btn btn-primary btn-small" href="{{ path('goal_edit', { 'id': goal.id }) }}"><i class="icon-edit icon-white"></i>Edit</a>
+          <!--
+          <button class="btn btn-danger btn-small" type="submit"><i class="icon-remove icon-white"></i>Delete</button>
+          -->
         </form>
-    </li>
-</ul>
+      </div>
+
+      <div style="text-align: right">
+        <a class="btn btn-primary btn-large" href="{{ path('action_new', { 'goal_id': goal.id}) }}"><i class="icon-plus icon-white"></i> Action</a>
+      </div>
+
+      <div class="row">
+      {% for action in goal.getActions() %}
+        <div class="span5">
+          <div class="light-block">
+            <span class="label label-info"><i class="icon-time icon-white"></i> {{ action.startdate|date('Y-m-d H:i') }}</span>
+            
+            <div class="form-actions">
+              <h3>{{ action.title }}</h3>
+              <form action="{{ path('action_delete', { 'id': action.id }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                <a class="btn btn-primary btn-small" href="{{ path('action_edit', { 'id': action.id }) }}"><i class="icon-edit icon-white"></i>Edit</a>
+                <!--
+                <button class="btn btn-danger btn-small" type="submit"><i class="icon-remove icon-white"></i>Delete</button>
+                -->
+              </form>
+            </div>
+            
+            <p>{{ action.challenge }}</p>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
 {% endblock %}

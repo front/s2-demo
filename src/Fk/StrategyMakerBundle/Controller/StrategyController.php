@@ -13,7 +13,7 @@ use Fk\StrategyMakerBundle\Form\StrategyType;
 /**
  * Strategy controller.
  *
- * @Route("/strategy")
+ * @Route("/")
  */
 class StrategyController extends Controller
 {
@@ -153,7 +153,7 @@ class StrategyController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('strategy_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('strategy_show', array('id' => $id)));
         }
 
         return array(

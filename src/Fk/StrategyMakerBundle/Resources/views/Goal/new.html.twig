@@ -1,19 +1,13 @@
 {% extends "FkStrategyMakerBundle::layout.html.twig" %}
 {% block content %}
-<h1>Goal creation</h1>
-
-<form action="{{ path('goal_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('goal') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+<h1>New Goal</h1>
+<div class="dark-block">
+  <form action="{{ path('goal_create') }}" method="post" {{ form_enctype(form) }}>
+      {{ form_widget(form) }}
+      <div class="form-actions">
+          <button class="btn btn-primary btn-medium" type="submit">Save</button>
+          <a class="btn btn-link btn-medium" href="{{ path('strategy_show', {'id': strategy.id}) }}">Cancel</a>
+      </div>
+  </form>
+</div>
 {% endblock %}

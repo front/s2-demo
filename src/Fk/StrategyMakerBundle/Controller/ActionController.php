@@ -61,16 +61,21 @@ class ActionController extends Controller
     /**
      * Displays a form to create a new Action entity.
      *
-     * @Route("/new", name="action_new")
+     * @Route("/new/{goal_id}", name="action_new")
      * @Template()
      */
-    public function newAction()
+    public function newAction($goal_id)
     {
+        $goal = $this->getDoctrine()->getManager()
+            ->getRepository('FkStrategyMakerBundle:Goal')->find($goal_id);
+
         $entity = new Action();
+        $entity->setGoal($goal);
         $form   = $this->createForm(new ActionType(), $entity);
 
         return array(
             'entity' => $entity,
+            'goal'   => $goal,
             'form'   => $form->createView(),
         );
     }
@@ -174,6 +179,8 @@ class ActionController extends Controller
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
+        $strategy_id = 0;
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('FkStrategyMakerBundle:Action')->find($id);
@@ -182,11 +189,13 @@ class ActionController extends Controller
                 throw $this->createNotFoundException('Unable to find Action entity.');
             }
 
+            $strategy_id = $entity->getGoal()->getStrategy()->getId();
+
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('action'));
+        return $this->redirect($this->generateUrl('strategy_show', array('id' => $strategy_id)));
     }
 
     private function createDeleteForm($id)

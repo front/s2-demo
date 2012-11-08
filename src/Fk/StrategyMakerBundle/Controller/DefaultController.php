@@ -7,14 +7,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Defaul controller.
+ * Default controller.
  *
  * @Route("/")
  */
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/home", name="home")
      * @Template()
      */
     public function indexAction()
