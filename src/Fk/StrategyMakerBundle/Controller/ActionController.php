@@ -98,7 +98,7 @@ class ActionController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('action_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('strategy_show', array('id' => $entity->getGoal()->getStrategy()->getId())));
         }
 
         return array(
