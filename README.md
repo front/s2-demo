@@ -1,4 +1,4 @@
-How I did it :)
+How to do it :)
 ===============
 
 1. Unzip file + create vhost + change `.htaccess`
@@ -39,3 +39,5 @@ How I did it :)
 8. Add Twitter Bootstrap and copy assets to public dir:
 
     php app/console assets:install web
+
+9. Do the web developer magic!
