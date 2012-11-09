@@ -13,13 +13,13 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
-      $(".form-actions form").hide();
+      $(".hide-buttons form").hide();
       
-      $(".form-actions").mouseover(function(){
+      $(".hide-buttons").mouseover(function(){
         $(this).find("form").show();
       });
       
-      $(".form-actions").mouseout(function(){
+      $(".hide-buttons").mouseout(function(){
         $(this).find("form").hide();
       });
     });

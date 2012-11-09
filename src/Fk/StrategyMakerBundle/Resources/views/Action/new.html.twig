@@ -1,13 +1,10 @@
-{% extends "FkStrategyMakerBundle::layout.html.twig" %}
+{% extends "FkStrategyMakerBundle::modal.html.twig" %}
 {% block content %}
-<h1>New Action</h1>
-<div class="dark-block">
-  <form action="{{ path('action_create') }}" method="post" {{ form_enctype(form) }}>
-      {{ form_widget(form) }}
-      <div class="form-actions">
-          <button class="btn btn-primary btn-medium" type="submit">Save</button>
-          <a class="btn btn-link btn-medium" href="{{ path('strategy_show', {'id': goal.getStrategy().getId()}) }}">Cancel</a>
-      </div>
-  </form>
-</div>
+<form action="{{ path('action_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <div class="form-actions">
+        <button class="btn btn-primary btn-medium" type="submit">Save</button>
+        <a class="btn btn-link btn-medium" href="{{ path('strategy_show', {'id': goal.getStrategy().getId()}) }}">Cancel</a>
+    </div>
+</form>
 {% endblock %}

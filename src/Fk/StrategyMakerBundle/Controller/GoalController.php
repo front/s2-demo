@@ -66,11 +66,16 @@ class GoalController extends Controller
      */
     public function newAction($strategy_id)
     {
-        $strategy = $this->getDoctrine()->getManager()
-            ->getRepository('FkStrategyMakerBundle:Strategy')->find($strategy_id);
-        
         $entity = new Goal();
-        $entity->setStrategy($strategy);
+        $strategy = new \Fk\StrategyMakerBundle\Entity\Strategy;
+        
+        if ($strategy_id > 0) {
+          $strategy = $this->getDoctrine()->getManager()
+              ->getRepository('FkStrategyMakerBundle:Strategy')->find($strategy_id);
+
+          $entity->setStrategy($strategy);          
+        }
+        
         $form   = $this->createForm(new GoalType(), $entity);
 
         return array(
