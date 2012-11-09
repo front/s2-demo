@@ -46,7 +46,7 @@ Steps To Build The App
 		php app/console doctrine:database:create
 		php app/console doctrine:schema:update --force
 
-	3.4. Add relationships mappings on entities classes:
+	3.4. Add relationships mappings on entities classes
 		See: http://symfony.com/doc/current/book/doctrine.html#relationship-mapping-metadata
 
 		Don't forget to place:
@@ -61,6 +61,7 @@ Steps To Build The App
       php app/console doctrine:schema:update --force
 
 	3.5. Create CRUD views & controllers for each entity:
+
     php app/console doctrine:generate:crud --entity=FkStrategyMakerBundle:Strategy --route-prefix=strategy --with-write
     php app/console doctrine:generate:crud --entity=FkStrategyMakerBundle:Goal --route-prefix=goal --with-write
     php app/console doctrine:generate:crud --entity=FkStrategyMakerBundle:Action --route-prefix=action --with-write
